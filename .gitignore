@@ -16,8 +16,8 @@ out
 dist
 build
 
-*lock
-*lock*
+package-lock.json
+*.lock
 
 
 # misc

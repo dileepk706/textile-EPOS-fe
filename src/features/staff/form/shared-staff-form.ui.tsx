@@ -11,7 +11,7 @@ interface SharedStaffFormProps {
   loading: boolean;
   mutationErrors: string[];
   isError: boolean;
-  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  onSubmit: (e?: React.BaseSyntheticEvent) => Promise<any> | any;
   title: string;
   submitText: string;
   currentStaff?: User;

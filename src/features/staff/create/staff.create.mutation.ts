@@ -8,7 +8,7 @@ import { CreateUserDto } from './staff.create.contracts';
 import { createUser } from 'shared/api/api.services';
 
 export function useCreateStaffMutation(
-  options: Partial<UseMutationOptions<DefaultError, CreateUserDto, unknown>> = {}
+  options: Partial<UseMutationOptions<any, DefaultError, CreateUserDto, unknown>> = {}
 ) {
   const { mutationKey = [], onSuccess, onError, onSettled, onMutate } = options;
   const queryClient = useQueryClient();

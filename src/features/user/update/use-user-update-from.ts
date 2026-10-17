@@ -45,8 +45,7 @@ export function useAccountSettings() {
       setValue('password', '');
       setValue('confirmPassword', '');
       // Auto-clear success message after 5 seconds
-      const timer = setTimeout(() => setSuccessMessage(null), 5000);
-      return () => clearTimeout(timer);
+      setTimeout(() => setSuccessMessage(null), 5000);
     },
     onError() {
       setSuccessMessage(null);
