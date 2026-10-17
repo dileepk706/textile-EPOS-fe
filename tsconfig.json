@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src", // Base directory for absolute paths
+    "paths": {
+      "@utils": ["utils/index"],
+      "@utils/*": ["utils/*"], // Alias for the utils folder
+      "@auth": ["auth/index"],
+      "@auth/*": ["auth/*"],
+      "@assets/*": ["assets/*"],
+      "@layouts": ["layouts/index"],
+      "@layouts/*": ["layouts/*"],
+      "@locales": ["shared/locals/index"],
+      "@locales/*": ["shared/locals/*"],
+      "@pages": ["pages/index"],
+      "@pages/*": ["pages/*"],
+      "@redux": ["redux/index"],
+      "@redux/*": ["redux/*"],
+      "@routes": ["routes/index"],
+      "@routes/*": ["routes/*"],
+      "@theme": ["theme/index"],
+      "@theme/*": ["theme/*"],
+      "@hooks": ["hooks/index"],
+      "@hooks/*": ["hooks/*"],
+      "@stores/*": ["stores/*"],
+      "features/*": ["features/*"],
+      "widgets/*": ["widgets/*"]
+    },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": [
+    "node_modules",
+    "vite.config.ts" // Exclude Vite config file
+  ],
+  "include": [
+    "src/**/*" // Only include files in the src directory
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}

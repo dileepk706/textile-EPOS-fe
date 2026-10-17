@@ -1,0 +1,93 @@
+import { Theme, alpha } from '@mui/material/styles';
+import { tableCellClasses } from '@mui/material/TableCell';
+import { tableRowClasses } from '@mui/material/TableRow';
+
+// ----------------------------------------------------------------------
+
+export default function Table(theme: Theme) {
+  return {
+    MuiTableContainer: {
+      styleOverrides: {
+        root: {
+          position: 'relative',
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&:hover': {
+            backgroundColor: '#f9f9f9',
+          },
+          [`&.${tableRowClasses.selected}`]: {
+            backgroundColor: alpha(theme.palette.primary.dark, 0.04),
+            '&:hover': {
+              backgroundColor: alpha(theme.palette.primary.dark, 0.08),
+            },
+          },
+          '&:last-of-type': {
+            [`& .${tableCellClasses.root}`]: {
+              borderColor: 'transparent',
+            },
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          borderBottom: `1px solid ${theme.palette.divider}`,
+          paddingTop: 12,
+          paddingBottom: 12,
+        },
+        head: {
+          fontSize: 12,
+          color: theme.palette.text.secondary,
+          fontWeight: 500,
+          textTransform: 'uppercase',
+          backgroundColor: theme.palette.background.neutral,
+        },
+        stickyHeader: {
+          backgroundColor: theme.palette.background.paper,
+          backgroundImage: `linear-gradient(to bottom, ${theme.palette.background.neutral} 0%, ${theme.palette.background.neutral} 100%)`,
+        },
+        paddingCheckbox: {
+          paddingLeft: theme.spacing(1),
+        },
+      },
+    },
+    MuiTablePagination: {
+      defaultProps: {
+        backIconButtonProps: {
+          size: 'small',
+        },
+        nextIconButtonProps: {
+          size: 'small',
+        },
+      },
+      styleOverrides: {
+        root: {
+          width: '100%',
+        },
+        toolbar: {
+          height: 64,
+        },
+        actions: {
+          marginRight: 8,
+        },
+        select: {
+          paddingLeft: 8,
+          '&:focus': {
+            borderRadius: theme.shape.borderRadius,
+          },
+        },
+        selectIcon: {
+          right: 4,
+          width: 16,
+          height: 16,
+          top: 'calc(50% - 8px)',
+        },
+      },
+    },
+  };
+}
