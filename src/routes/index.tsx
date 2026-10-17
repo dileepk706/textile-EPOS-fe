@@ -20,6 +20,14 @@ const browserRouter = () =>
       {
         errorElement: <BubbleError />,
         children: [
+          {
+            path: '/',
+            loader: async () => redirect(pathKeys.products),
+          },
+          {
+            path: '/billing',
+            loader: async () => redirect(pathKeys.billing.supplierFP),
+          },
           authRoutes,
           adminRoutes,
           billingRoutes,

@@ -36,7 +36,7 @@ export const adminRoutes: RouteObject = {
     </AppLayout>
   ),
   children: [
-    dashboardPageRoute,
+    // dashboardPageRoute,
     userProfilePageRoute,
     userListRoute,
     staffCreateRoute,
