@@ -48,7 +48,7 @@ function waitForSessionReady(signal: AbortSignal) {
 }
 
 function buildDashboardRedirect() {
-  return redirect(pathKeys.dashboard().root);
+  return redirect(pathKeys.root);
 }
 
 export async function redirectAuthenticatedUsersMiddleware({ request }: RouteMiddlewareArgs) {

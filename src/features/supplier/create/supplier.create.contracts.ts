@@ -7,7 +7,7 @@ export const createSupplierFormSchema = z.object({
   email: z.string().email('Invalid email address').optional().or(z.literal('')),
   address: z.string().optional(),
   gstin: z.string().optional(),
-  is_active: z.boolean().optional().default(true),
+  is_active: z.boolean().optional(),
 });
 
 export type CreateSupplierFormDto = z.infer<typeof createSupplierFormSchema>;

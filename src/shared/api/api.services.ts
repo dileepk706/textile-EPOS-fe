@@ -7,12 +7,20 @@ export function loginUser(loginUserDto: any, config?: AxiosRequestConfig<any>) {
   return api.post('/user-auth/login', data, config);
 }
 
+export function registerUser(data: any, config?: AxiosRequestConfig) {
+  return api.post('/user-auth/register', data, config);
+}
+
 export function logoutUser(config?: AxiosRequestConfig) {
   return api.post('/user-auth/logout', config);
 }
 
 export function getUserProfile(config?: AxiosRequestConfig) {
   return api.get('/user/profile', config);
+}
+
+export function updateSelfUserProfile(data: any, config?: AxiosRequestConfig) {
+  return api.put('/user/profile', data, config);
 }
 
 export function getTextile(config?: AxiosRequestConfig) {

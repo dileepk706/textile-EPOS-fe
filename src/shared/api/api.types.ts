@@ -11,3 +11,12 @@ export type CurrentSubscriptionResponseDto = {
   plan?: any;
   [key: string]: any;
 };
+
+export type UpdateUserDto = {
+  id?: string | null;
+  name?: string;
+  email?: string;
+  password?: string;
+  currentPassword?: string;
+  [key: string]: any;
+};

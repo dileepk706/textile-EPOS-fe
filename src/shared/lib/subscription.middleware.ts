@@ -63,7 +63,7 @@ export async function subscriptionMiddleware({ request }: MiddlewareArgs) {
     setLoading(true);
 
     // Ensure we have current subscription data, fetching or using cached query data
-    const response = await queryClient.ensureQueryData(currentSubscriptionQueryOptions());
+    const response: any = await queryClient.ensureQueryData(currentSubscriptionQueryOptions());
 
     if (response && response.data) {
       setSubscriptionDetails(response.data);

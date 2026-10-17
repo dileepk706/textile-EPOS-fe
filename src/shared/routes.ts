@@ -23,8 +23,15 @@ export const pathKeys = {
   },
 
   profile: '/profile/',
+  account: (_isRoot?: boolean) => ({
+    root: '/account',
+    setting: '/account/setting',
+    plan: '/account/plan',
+  }),
   settings: {
     root: '/settings',
+    gym: '/settings/gym',
+    user: '/settings/user',
   },
 
   staff: {

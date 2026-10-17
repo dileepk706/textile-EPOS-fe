@@ -2,9 +2,9 @@ import { Alert, Box, CircularProgress, Stack, Typography } from '@mui/material';
 import { TextField } from 'shared/ui/text-field';
 import { FactoryButton } from 'shared/ui';
 import { Paper } from 'shared/ui/paper';
-import { RoleSelect } from 'features/roles/role-select';
 import { UseFormReturn } from 'react-hook-form';
 import { User } from 'entities/session';
+import { RoleSelect } from './role-select.ui';
 
 interface SharedStaffFormProps {
   form: UseFormReturn<any>;

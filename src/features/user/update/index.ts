@@ -1,1 +1,1 @@
-export { default as AccountSettingsForm } from './update/user.update-form.ui';
+export { default as AccountSettingsForm } from './user.update-form.ui';

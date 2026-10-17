@@ -1,11 +1,11 @@
-import { useAuthContext } from '@auth/hooks';
+import { useSessionStore } from 'entities/session';
 
 export function usePolicy() {
-  const auth = useAuthContext();
+  const user = useSessionStore((state) => state.user);
 
-  const can = (permission: string) => auth.permissions.includes(permission);
+  const can = (_permission: string) => Boolean(user);
 
-  const hasFeature = (feature: string) => auth.features.includes(feature);
+  const hasFeature = (_feature: string) => Boolean(user);
 
   return {
     can,

@@ -11,7 +11,7 @@ export function useProductCreateForm() {
 
   const form = useForm<CreateProductFormDto>({
     mode: 'onTouched',
-    resolver: standardSchemaResolver(createProductFormSchema),
+    resolver: standardSchemaResolver(createProductFormSchema) as any,
     defaultValues: {
       name: '',
       barcode: '',
@@ -68,6 +68,6 @@ export function useProductCreateForm() {
     mutationErrors: getErrorMessages(mutation.error),
     isError: mutation.isError,
     isSuccess: mutation.isSuccess,
-    onSubmit: form.handleSubmit(onValid),
+    onSubmit: form.handleSubmit(onValid as any),
   };
 }

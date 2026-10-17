@@ -26,7 +26,7 @@ export function useProductUpdateForm(currentProduct: Product) {
 
   const form = useForm<UpdateProductFormDto>({
     mode: 'onTouched',
-    resolver: standardSchemaResolver(updateProductFormSchema),
+    resolver: standardSchemaResolver(updateProductFormSchema) as any,
     defaultValues,
     values: defaultValues,
   });
@@ -78,6 +78,6 @@ export function useProductUpdateForm(currentProduct: Product) {
     mutationErrors: getErrorMessages(mutation.error),
     isError: mutation.isError,
     isSuccess: mutation.isSuccess,
-    onSubmit: form.handleSubmit(onValid),
+    onSubmit: form.handleSubmit(onValid as any),
   };
 }

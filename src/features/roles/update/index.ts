@@ -1,1 +1,0 @@
-export * from './role.update-form.ui';

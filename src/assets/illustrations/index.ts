@@ -3,8 +3,6 @@ export { default as AvatarShape } from './avatar-shape';
 export { default as SeoIllustration } from './seo-illustration';
 export { default as UploadIllustration } from './upload-illustration';
 export { default as BookingIllustration } from './booking-illustration';
-export { default as CheckInIllustration } from './check-in-illustration';
-export { default as CheckOutIllustration } from './check-out-illustration';
 export { default as ForbiddenIllustration } from './forbidden-illustration';
 export { default as MotivationIllustration } from './motivation-illustration';
 export { default as SeverErrorIllustration } from './sever-error-illustration';

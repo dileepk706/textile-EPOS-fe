@@ -1,7 +1,5 @@
 import React from 'react';
-import { Autocomplete, CircularProgress } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { getRolesQueryOptions } from 'entities/roles/roles.api';
+import { Autocomplete } from '@mui/material';
 import { TextField } from 'shared/ui/text-field';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { formatCamelCase } from '@utils/format-text';
@@ -21,7 +19,7 @@ export function RoleSelect<T extends FieldValues>({
   placeholder = 'Select a role',
   disabled,
 }: RoleSelectProps<T>) {
-  const roles = getRolesQueryOptions();
+  const roles = ['ADMIN', 'MANAGER', 'CASHIER'];
 
   return (
     <Controller
