@@ -7,8 +7,8 @@ import Chip from '@mui/material/Chip';
 import Button from '@mui/material/Button';
 import Iconify from 'shared/ui/iconify';
 import { fCurrency } from '@utils/format-number';
-import { Till, useActiveTillStore } from 'entities/till';
-import { CloseTillDialog } from 'features/till';
+import { Till, useActiveTillStore, useTillCashPolling } from 'entities/till';
+import { CloseTillDialog, CashInDialog, CashOutDialog } from 'features/till';
 
 // ----------------------------------------------------------------------
 
@@ -19,6 +19,12 @@ interface BillingTillHeaderProps {
 export default function BillingTillHeader({ activeTill }: BillingTillHeaderProps) {
   const { clearActiveTill } = useActiveTillStore();
   const [showCloseDialog, setShowCloseDialog] = useState(false);
+  const [showCashInDialog, setShowCashInDialog] = useState(false);
+  const [showCashOutDialog, setShowCashOutDialog] = useState(false);
+
+  const isOpen = activeTill.status === 'open';
+
+  useTillCashPolling(1000);
 
   return (
     <>
@@ -65,9 +71,9 @@ export default function BillingTillHeader({ activeTill }: BillingTillHeaderProps
                 sx={{ fontFamily: 'monospace', fontWeight: 700 }}
               />
               <Chip
-                label="OPEN"
+                label={isOpen ? 'OPEN' : activeTill.status?.toUpperCase() || 'CLOSED'}
                 size="small"
-                color="success"
+                color={isOpen ? 'success' : 'error'}
                 variant="soft"
                 sx={{ fontWeight: 700 }}
               />
@@ -112,13 +118,35 @@ export default function BillingTillHeader({ activeTill }: BillingTillHeaderProps
           {/* Action buttons */}
           <Stack direction="row" spacing={1}>
             <Button
+              variant="soft"
+              color="success"
+              size="medium"
+              startIcon={<Iconify icon="solar:card-recive-bold" />}
+              onClick={() => setShowCashInDialog(true)}
+              disabled={!isOpen}
+            >
+              Cash In
+            </Button>
+
+            <Button
+              variant="soft"
+              color="warning"
+              size="medium"
+              startIcon={<Iconify icon="solar:card-send-bold" />}
+              onClick={() => setShowCashOutDialog(true)}
+              disabled={!isOpen}
+            >
+              Cash Out
+            </Button>
+
+            <Button
               variant="outlined"
               color="inherit"
               size="medium"
               startIcon={<Iconify icon="solar:transfer-horizontal-bold" />}
               onClick={clearActiveTill}
             >
-              Switch Counter
+              Switch
             </Button>
 
             <Button
@@ -133,6 +161,18 @@ export default function BillingTillHeader({ activeTill }: BillingTillHeaderProps
           </Stack>
         </Stack>
       </Paper>
+
+      <CashInDialog
+        open={showCashInDialog}
+        onClose={() => setShowCashInDialog(false)}
+        till={activeTill}
+      />
+
+      <CashOutDialog
+        open={showCashOutDialog}
+        onClose={() => setShowCashOutDialog(false)}
+        till={activeTill}
+      />
 
       <CloseTillDialog
         open={showCloseDialog}

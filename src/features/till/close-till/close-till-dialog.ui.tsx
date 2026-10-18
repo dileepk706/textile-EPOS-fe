@@ -104,7 +104,11 @@ export function CloseTillDialog({ open, onClose, till, onClosed }: CloseTillDial
     <Dialog open={open} onClose={mutation.isPending ? undefined : onClose} maxWidth="sm" fullWidth>
       <Box component="form" onSubmit={handleSubmit}>
         <DialogTitle sx={{ pb: 1, display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Iconify icon="solar:lock-keyhole-minimalistic-bold" width={24} sx={{ color: 'error.main' }} />
+          <Iconify
+            icon="solar:lock-keyhole-minimalistic-bold"
+            width={24}
+            sx={{ color: 'error.main' }}
+          />
           <span>Close Shift & Count Cash</span>
         </DialogTitle>
 

@@ -48,7 +48,11 @@ export function OpenTillDialog({ open, onClose, till, onOpened }: OpenTillDialog
   const mutation = useMutation({
     mutationFn: (data: any) => openTill(till!.id, data),
     onSuccess: (res: any) => {
-      const openedTill = res?.data?.data?.till || { ...till, status: 'open', opening_balance: Number(openingBalance) };
+      const openedTill = res?.data?.data?.till || {
+        ...till,
+        status: 'open',
+        opening_balance: Number(openingBalance),
+      };
       queryClient.invalidateQueries({ queryKey: ['tills'] });
       setActiveTill(openedTill);
       enqueueSnackbar(`Till "${till?.name}" opened successfully`, { variant: 'success' });
@@ -159,7 +163,13 @@ export function OpenTillDialog({ open, onClose, till, onOpened }: OpenTillDialog
             variant="contained"
             color="primary"
             disabled={mutation.isPending}
-            startIcon={mutation.isPending ? <CircularProgress size={18} color="inherit" /> : <Iconify icon="solar:key-minimalistic-bold" />}
+            startIcon={
+              mutation.isPending ? (
+                <CircularProgress size={18} color="inherit" />
+              ) : (
+                <Iconify icon="solar:key-minimalistic-bold" />
+              )
+            }
           >
             {mutation.isPending ? 'Opening Shift...' : 'Open Till & Proceed'}
           </Button>

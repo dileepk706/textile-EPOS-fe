@@ -187,67 +187,6 @@ export default function SupplierPurchasePage() {
           sx={{ mb: 3 }}
         />
 
-        {/* Active Register Session Info */}
-        {activeTill && (
-          <Paper
-            elevation={0}
-            sx={{
-              p: 2,
-              mb: 3,
-              borderRadius: 2,
-              bgcolor: 'background.paper',
-              border: (theme) => `1px solid ${theme.palette.divider}`,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: 2,
-            }}
-          >
-            <Stack direction="row" spacing={1.5} alignItems="center">
-              <Box
-                sx={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 1.5,
-                  bgcolor: 'primary.lighter',
-                  color: 'primary.main',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Iconify icon="solar:calculator-bold" width={22} />
-              </Box>
-              <Box>
-                <Stack direction="row" spacing={1} alignItems="center">
-                  <Typography variant="subtitle2" fontWeight={700}>
-                    Active Counter: {activeTill.name}
-                  </Typography>
-                  <Chip
-                    label={activeTill.code}
-                    size="small"
-                    sx={{ fontFamily: 'monospace', fontWeight: 700 }}
-                  />
-                  <Chip
-                    label="OPEN"
-                    size="small"
-                    color="success"
-                    variant="soft"
-                    sx={{ fontWeight: 700 }}
-                  />
-                </Stack>
-                <Typography variant="caption" color="text.secondary">
-                  Cash in drawer: <strong>{fCurrency(activeTill.cash_in_till)}</strong>
-                </Typography>
-              </Box>
-            </Stack>
-
-            <Typography variant="body2" color="text.secondary">
-              Step 1 of 2: Select a supplier to start purchase order
-            </Typography>
-          </Paper>
-        )}
-
         {/* Error State */}
         {isError && (
           <ApiErrorView

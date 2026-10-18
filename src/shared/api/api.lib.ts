@@ -8,10 +8,29 @@ export function responseContract<Data>(schema: ZodType<Data>) {
   };
 }
 
-export function normalizeValidationErrors(data: any): any {
-  return Object.entries(data.errors).flatMap(([field, messages]: [string, any]) =>
-    messages.map((message: any) => `${field} ${message}`)
-  );
+export function normalizeValidationErrors(data: any): string[] {
+  if (!data || !data.errors) return [];
+  if (Array.isArray(data.errors)) {
+    return data.errors.map((e: any) => {
+      if (typeof e === 'string') return e;
+      if (e && typeof e === 'object') {
+        return e.field ? `${e.field}: ${e.message || JSON.stringify(e)}` : e.message || JSON.stringify(e);
+      }
+      return String(e);
+    });
+  }
+  if (typeof data.errors === 'object') {
+    return Object.entries(data.errors).flatMap(([field, messages]: [string, any]) => {
+      if (Array.isArray(messages)) {
+        return messages.map((message: any) => `${field} ${typeof message === 'object' ? message.message || JSON.stringify(message) : message}`);
+      }
+      if (typeof messages === 'string') {
+        return [`${field} ${messages}`];
+      }
+      return [`${field} ${JSON.stringify(messages)}`];
+    });
+  }
+  return [String(data.errors)];
 }
 
 export function getErrorMessages(error: any): string[] {

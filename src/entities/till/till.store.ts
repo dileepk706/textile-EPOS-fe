@@ -25,10 +25,15 @@ export const useActiveTillStore = create<ActiveTillState>()(
           activeTill: null,
           activeTillId: null,
         }),
-      updateCashInTill: (newAmount) =>
-        set((state) => ({
-          activeTill: state.activeTill ? { ...state.activeTill, cash_in_till: newAmount } : null,
-        })),
+      updateCashInTill: (newAmount: number) =>
+        set((state) => {
+          if (!state.activeTill || state.activeTill.cash_in_till === newAmount) {
+            return state;
+          }
+          return {
+            activeTill: { ...state.activeTill, cash_in_till: newAmount },
+          };
+        }),
     }),
     {
       name: 'pos_active_till_session',

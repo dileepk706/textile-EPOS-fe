@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 export const LoginUserSchema = z.object({
-  email: z.string().email({
-    message: 'Oops! The email address you entered is invalid.',
+  email: z.string().min(1, {
+    message: 'Please enter your email or mobile number.',
   }),
-  password: z.string().min(3, {
-    message: 'Your password must be at least 8 characters long.',
+  password: z.string().min(1, {
+    message: 'Please enter your password.',
   }),
 });
 

@@ -3,7 +3,8 @@ import { alpha } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
-type Props = Omit<PaperProps, 'variant'> & { isSelected?: boolean };
+// type Props = Omit<PaperProps, 'variant'> & { isSelected?: boolean };
+type Props = PaperProps & { isSelected?: boolean };
 
 export default function paper({ isSelected, children, sx }: Props) {
   return (

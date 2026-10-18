@@ -18,6 +18,7 @@ import { fCurrency } from '@utils/format-number';
 import { pathKeys } from 'shared/routes';
 import { getTillsQueryOptions, Till, useActiveTillStore } from 'entities/till';
 import { OpenTillDialog, CloseTillDialog, CreateTillDialog } from 'features/till';
+import LogoutButton from '@layouts/_common/LogoutButton';
 
 // ----------------------------------------------------------------------
 
@@ -218,6 +219,7 @@ export default function SetupTillPage() {
           </Stack>
 
           <Stack direction="row" spacing={1.5} alignItems="center">
+            <LogoutButton />
             <Button
               variant="outlined"
               color="inherit"

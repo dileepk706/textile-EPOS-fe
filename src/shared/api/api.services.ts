@@ -128,6 +128,18 @@ export function blockTill(id: string, data: any, config?: AxiosRequestConfig) {
   return api.patch(`/tills/${id}/block`, data, config);
 }
 
+export function cashInTill(id: string, data: any, config?: AxiosRequestConfig) {
+  return api.post(`/tills/${id}/cash-in`, data, config);
+}
+
+export function cashOutTill(id: string, data: any, config?: AxiosRequestConfig) {
+  return api.post(`/tills/${id}/cash-out`, data, config);
+}
+
+export function getTillCash(id: string, config?: AxiosRequestConfig) {
+  return api.get(`/tills/${id}/cash`, config);
+}
+
 // ----------------------------------------------------------------------
 // Purchases
 

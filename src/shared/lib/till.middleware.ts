@@ -62,7 +62,6 @@ export async function tillMiddleware({ request }: MiddlewareArgs) {
     }
     return redirect(pathKeys.setuptill);
   }
-  console.log(activeTill);
 
   return null;
 }

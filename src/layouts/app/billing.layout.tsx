@@ -6,6 +6,7 @@ import NavVertical from './NavVertical';
 import NavMini from './NavMini';
 import AppMain from './app.main';
 import Header from './Header';
+import BillingDesktopHeader from './BillingDesktopHeader';
 
 // ----------------------------------------------------------------------
 
@@ -46,7 +47,10 @@ export default function BillingLayout({ children }: Props) {
       >
         {sidebar}
 
-        <AppMain>{children}</AppMain>
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+          {lgUp && <BillingDesktopHeader />}
+          <AppMain>{children}</AppMain>
+        </Box>
       </Box>
     </>
   );

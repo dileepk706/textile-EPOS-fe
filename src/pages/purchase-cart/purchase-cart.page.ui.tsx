@@ -12,7 +12,6 @@ import {
   TextField,
   Chip,
   Divider,
-  Paper,
   InputAdornment,
   Dialog,
   DialogTitle,
@@ -32,6 +31,7 @@ import { getProductsQueryOptions, Product } from 'entities/product';
 import { usePurchaseCartStore, PurchaseCartItem } from 'entities/purchase';
 import { usePurchaseSessionStore } from 'entities/supplier';
 import { useActiveTillStore } from 'entities/till';
+import { Paper } from 'shared/ui/paper';
 
 // ─────────────────────────────────────────────────
 // Add-to-Cart Dialog (per product)
@@ -375,7 +375,7 @@ export default function PurchaseCartPage() {
         <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} alignItems="flex-start">
           {/* ─── LEFT: Product List ─── */}
           <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Card sx={{ p: 2 }}>
+            <Paper sx={{ p: 2 }}>
               {/* Search */}
               <TextField
                 fullWidth
@@ -441,7 +441,6 @@ export default function PurchaseCartPage() {
                             justifyContent: 'space-between',
                             gap: 2,
                             borderColor: inCart ? 'primary.main' : undefined,
-                            bgcolor: inCart ? 'primary.lighter' : 'background.paper',
                           }}
                         >
                           <Box sx={{ flex: 1, minWidth: 0 }}>
@@ -520,7 +519,7 @@ export default function PurchaseCartPage() {
                   )}
                 </Stack>
               )}
-            </Card>
+            </Paper>
           </Box>
 
           {/* ─── RIGHT: Cart Panel ─── */}
@@ -532,7 +531,7 @@ export default function PurchaseCartPage() {
               top: { md: 80 },
             }}
           >
-            <Card sx={{ p: 2.5 }}>
+            <Paper sx={{ p: 2.5 }}>
               <Stack direction="row" alignItems="center" spacing={1} mb={2}>
                 <Badge badgeContent={items.length} color="primary">
                   <Iconify icon="solar:cart-bold" width={24} />
@@ -631,7 +630,7 @@ export default function PurchaseCartPage() {
                   </Button>
                 </>
               )}
-            </Card>
+            </Paper>
           </Box>
         </Stack>
       </Container>

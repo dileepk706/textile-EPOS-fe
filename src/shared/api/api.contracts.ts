@@ -15,6 +15,6 @@ export const ApiErrorDataDtoSchema = z.object({
 export const ApiErrorDataSchema = z.array(z.string());
 
 export const LoginUserDtoSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(3),
+  email: z.string().min(1, 'Email or mobile number is required'),
+  password: z.string().min(1, 'Password is required'),
 });
