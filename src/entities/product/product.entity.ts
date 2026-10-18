@@ -38,7 +38,7 @@ export interface Product {
   cost_price?: number;
   costPrice?: number;
   selling_price?: number;
-  available_stock?: number;
+  quantity_available?: number;
   stock?: number;
   batches?: ProductBatch[];
 }

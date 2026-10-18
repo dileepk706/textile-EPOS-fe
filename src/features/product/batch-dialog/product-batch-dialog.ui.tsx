@@ -55,7 +55,13 @@ export function ProductBatchDialog({ open, onClose, product }: ProductBatchDialo
   return (
     <Dialog fullWidth maxWidth="lg" open={open} onClose={onClose}>
       <DialogTitle sx={{ pb: 1.5 }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={1}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          flexWrap="wrap"
+          gap={1}
+        >
           <Box>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Typography variant="h6">{product.name}</Typography>
@@ -136,8 +142,8 @@ export function ProductBatchDialog({ open, onClose, product }: ProductBatchDialo
                 {batches.map((batch, index) => {
                   const batchNo = batch.batch_no || batch.batch_number || `BATCH-${index + 1}`;
                   const availableQty =
-                    batch.available_quantity !== undefined
-                      ? batch.available_quantity
+                    batch.quantity_available !== undefined
+                      ? batch.quantity_available
                       : batch.quantity !== undefined
                       ? batch.quantity
                       : 0;
@@ -147,7 +153,11 @@ export function ProductBatchDialog({ open, onClose, product }: ProductBatchDialo
                     <TableRow key={batch.id || batch._id || batchNo || index} hover>
                       <TableCell>
                         <Stack spacing={0.25}>
-                          <Typography variant="body2" fontWeight={700} sx={{ fontFamily: 'monospace' }}>
+                          <Typography
+                            variant="body2"
+                            fontWeight={700}
+                            sx={{ fontFamily: 'monospace' }}
+                          >
                             {batchNo}
                           </Typography>
                           {batch.created_at || batch.createdAt ? (
@@ -191,7 +201,12 @@ export function ProductBatchDialog({ open, onClose, product }: ProductBatchDialo
                           <Tooltip
                             title={
                               <Box sx={{ p: 0.5 }}>
-                                <Typography variant="caption" fontWeight={700} display="block" sx={{ mb: 0.5 }}>
+                                <Typography
+                                  variant="caption"
+                                  fontWeight={700}
+                                  display="block"
+                                  sx={{ mb: 0.5 }}
+                                >
                                   Serial Numbers ({serials.length}):
                                 </Typography>
                                 <Typography variant="caption" sx={{ fontFamily: 'monospace' }}>
@@ -207,7 +222,11 @@ export function ProductBatchDialog({ open, onClose, product }: ProductBatchDialo
                               variant="outlined"
                               color="info"
                               icon={<Iconify icon="solar:hashtag-bold" width={14} />}
-                              sx={{ fontFamily: 'monospace', fontSize: '0.72rem', cursor: 'pointer' }}
+                              sx={{
+                                fontFamily: 'monospace',
+                                fontSize: '0.72rem',
+                                cursor: 'pointer',
+                              }}
                             />
                           </Tooltip>
                         ) : (

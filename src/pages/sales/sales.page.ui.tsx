@@ -265,9 +265,9 @@ export default function SalesPage() {
                                   SKU: {product.sku}
                                 </Typography>
                               )}
-                              {product.available_stock !== undefined && (
+                              {product.quantity_available !== undefined && (
                                 <Typography variant="caption" color="text.secondary">
-                                  Total Stock: <strong>{product.available_stock}</strong>
+                                  Total Stock: <strong>{product.quantity_available}</strong>
                                 </Typography>
                               )}
                             </Stack>

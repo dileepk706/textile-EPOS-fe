@@ -43,34 +43,34 @@ export default function ProductTable({ rows, isLoading }: ProductTableProps) {
         </Stack>
       ),
     },
-    {
-      id: 'price',
-      label: 'Price',
-      minWidth: 120,
-      align: 'right',
-      render: (row) => {
-        const sellingPrice = row.price ?? row.selling_price;
-        return (
-          <Typography variant="body2" fontWeight={600} color="primary.main">
-            {sellingPrice !== undefined ? fCurrency(sellingPrice) : '—'}
-          </Typography>
-        );
-      },
-    },
-    {
-      id: 'cost_price',
-      label: 'Cost Price',
-      minWidth: 120,
-      align: 'right',
-      render: (row) => {
-        const costPrice = row.cost_price ?? row.costPrice;
-        return (
-          <Typography variant="body2" color="text.secondary">
-            {costPrice !== undefined ? fCurrency(costPrice) : '—'}
-          </Typography>
-        );
-      },
-    },
+    // {
+    //   id: 'price',
+    //   label: 'Price',
+    //   minWidth: 120,
+    //   align: 'right',
+    //   render: (row) => {
+    //     const sellingPrice = row.price ?? row.selling_price;
+    //     return (
+    //       <Typography variant="body2" fontWeight={600} color="primary.main">
+    //         {sellingPrice !== undefined ? fCurrency(sellingPrice) : '—'}
+    //       </Typography>
+    //     );
+    //   },
+    // },
+    // {
+    //   id: 'cost_price',
+    //   label: 'Cost Price',
+    //   minWidth: 120,
+    //   align: 'right',
+    //   render: (row) => {
+    //     const costPrice = row.cost_price ?? row.costPrice;
+    //     return (
+    //       <Typography variant="body2" color="text.secondary">
+    //         {costPrice !== undefined ? fCurrency(costPrice) : '—'}
+    //       </Typography>
+    //     );
+    //   },
+    // },
     {
       id: 'barcode',
       label: 'Barcode',
@@ -90,7 +90,7 @@ export default function ProductTable({ rows, isLoading }: ProductTableProps) {
       minWidth: 140,
       align: 'center',
       render: (row) => {
-        const stock = row.available_stock ?? row.stock ?? 0;
+        const stock = row.quantity_available ?? row.stock ?? 0;
         const unit = row.unit || 'pcs';
 
         let color: 'success' | 'warning' | 'error' = 'success';

@@ -485,9 +485,9 @@ export default function PurchaseCartPage() {
                                   SKU: {product.sku}
                                 </Typography>
                               )}
-                              {product.available_stock !== undefined && (
+                              {product.quantity_available !== undefined && (
                                 <Typography variant="caption" color="text.secondary">
-                                  Stock: {product.available_stock}
+                                  Stock: {product.quantity_available}
                                 </Typography>
                               )}
                             </Stack>

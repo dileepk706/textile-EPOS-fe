@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
 import Pagination from '@mui/material/Pagination';
 import { fCurrency } from '@utils/format-number';
@@ -22,6 +21,7 @@ import { DataTable, ColumnDef } from 'shared/ui/data-table';
 import { ApiErrorView } from 'shared/ui/api-error-views';
 import { pathKeys } from 'shared/routes';
 import { getPurchaseReport } from 'shared/api/api.services';
+import { Paper } from 'shared/ui/paper';
 
 export default function PurchaseReportPage() {
   const navigate = useNavigate();
@@ -37,7 +37,10 @@ export default function PurchaseReportPage() {
   const [endDate, setEndDate] = useState('');
 
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['purchase-report', { page, limit, search, paymentStatus, paymentMethod, startDate, endDate }],
+    queryKey: [
+      'purchase-report',
+      { page, limit, search, paymentStatus, paymentMethod, startDate, endDate },
+    ],
     queryFn: async () => {
       const res = await getPurchaseReport({
         page,
@@ -106,9 +109,7 @@ export default function PurchaseReportPage() {
       id: 'staff_name',
       label: 'Recorded By',
       minWidth: 120,
-      render: (row) => (
-        <Typography variant="body2">{row.staff_name || 'Staff'}</Typography>
-      ),
+      render: (row) => <Typography variant="body2">{row.staff_name || 'Staff'}</Typography>,
     },
     {
       id: 'items_count',
@@ -203,7 +204,10 @@ export default function PurchaseReportPage() {
         <CustomBreadcrumbs
           heading="Purchase Report"
           links={[
-            { name: isBillingContext ? 'POS Billing' : 'Dashboard', href: isBillingContext ? pathKeys.billing.root : pathKeys.root },
+            {
+              name: isBillingContext ? 'POS Billing' : 'Dashboard',
+              href: isBillingContext ? pathKeys.billing.root : pathKeys.root,
+            },
             { name: 'Reports' },
             { name: 'Purchase Report' },
           ]}
@@ -232,39 +236,57 @@ export default function PurchaseReportPage() {
             }}
           >
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Total Purchase Orders</Typography>
-              <Typography variant="h5" fontWeight={700}>{summary.total_purchases_count || total}</Typography>
-              <Typography variant="caption" color="text.secondary">Procured: {summary.total_quantity || 0} units</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Purchase Orders
+              </Typography>
+              <Typography variant="h5" fontWeight={700}>
+                {summary.total_purchases_count || total}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Procured: {summary.total_quantity || 0} units
+              </Typography>
             </Paper>
 
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Gross Procurement</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Gross Procurement
+              </Typography>
               <Typography variant="h5" fontWeight={700} color="primary.main">
                 {fCurrency(summary.total_amount || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Total order amount</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total order amount
+              </Typography>
             </Paper>
 
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Total Paid Amount</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Paid Amount
+              </Typography>
               <Typography variant="h5" fontWeight={700} color="success.main">
                 {fCurrency(summary.total_paid || summary.net_amount || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Settled payments</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Settled payments
+              </Typography>
             </Paper>
 
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Discount / Tax</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Discount / Tax
+              </Typography>
               <Typography variant="h6" fontWeight={700} color="text.secondary">
                 -{fCurrency(summary.total_discount || 0)} / +{fCurrency(summary.total_tax || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Net purchase adjustments</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Net purchase adjustments
+              </Typography>
             </Paper>
           </Box>
         )}
 
         {/* Filters Toolbar */}
-        <Card sx={{ p: 2.5, mb: 3 }}>
+        <Paper sx={{ p: 2.5, mb: 3 }}>
           <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center">
             <TextField
               size="small"
@@ -364,7 +386,7 @@ export default function PurchaseReportPage() {
               </Button>
             )}
           </Stack>
-        </Card>
+        </Paper>
 
         {/* Data Table */}
         {isError ? (

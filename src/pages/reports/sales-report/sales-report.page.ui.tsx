@@ -11,7 +11,6 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import Paper from '@mui/material/Paper';
 import MenuItem from '@mui/material/MenuItem';
 import Pagination from '@mui/material/Pagination';
 import { fCurrency } from '@utils/format-number';
@@ -22,6 +21,7 @@ import { DataTable, ColumnDef } from 'shared/ui/data-table';
 import { ApiErrorView } from 'shared/ui/api-error-views';
 import { pathKeys } from 'shared/routes';
 import { getSalesReport } from 'shared/api/api.services';
+import { Paper } from 'shared/ui/paper';
 
 export default function SalesReportPage() {
   const navigate = useNavigate();
@@ -37,7 +37,10 @@ export default function SalesReportPage() {
   const [endDate, setEndDate] = useState('');
 
   const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ['sales-report', { page, limit, search, paymentStatus, paymentMethod, startDate, endDate }],
+    queryKey: [
+      'sales-report',
+      { page, limit, search, paymentStatus, paymentMethod, startDate, endDate },
+    ],
     queryFn: async () => {
       const res = await getSalesReport({
         page,
@@ -84,9 +87,7 @@ export default function SalesReportPage() {
       id: 'staff_name',
       label: 'Cashier / Staff',
       minWidth: 140,
-      render: (row) => (
-        <Typography variant="body2">{row.staff_name || 'Staff'}</Typography>
-      ),
+      render: (row) => <Typography variant="body2">{row.staff_name || 'Staff'}</Typography>,
     },
     {
       id: 'till',
@@ -94,7 +95,11 @@ export default function SalesReportPage() {
       minWidth: 130,
       render: (row) => (
         <Chip
-          label={row.till?.name || row.till?.code || row.till_id ? `Till: ${row.till?.name || row.till?.code || 'Assigned'}` : 'Counter'}
+          label={
+            row.till?.name || row.till?.code || row.till_id
+              ? `Till: ${row.till?.name || row.till?.code || 'Assigned'}`
+              : 'Counter'
+          }
           size="small"
           variant="outlined"
           sx={{ fontWeight: 600 }}
@@ -194,7 +199,10 @@ export default function SalesReportPage() {
         <CustomBreadcrumbs
           heading="Sales Report"
           links={[
-            { name: isBillingContext ? 'POS Billing' : 'Dashboard', href: isBillingContext ? pathKeys.billing.root : pathKeys.root },
+            {
+              name: isBillingContext ? 'POS Billing' : 'Dashboard',
+              href: isBillingContext ? pathKeys.billing.root : pathKeys.root,
+            },
             { name: 'Reports' },
             { name: 'Sales Report' },
           ]}
@@ -223,39 +231,57 @@ export default function SalesReportPage() {
             }}
           >
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Total Invoices</Typography>
-              <Typography variant="h5" fontWeight={700}>{summary.total_sales_count || total}</Typography>
-              <Typography variant="caption" color="text.secondary">Total Qty: {summary.total_quantity || 0} pcs</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Invoices
+              </Typography>
+              <Typography variant="h5" fontWeight={700}>
+                {summary.total_sales_count || total}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Qty: {summary.total_quantity || 0} pcs
+              </Typography>
             </Paper>
 
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Total Sales Volume</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Sales Volume
+              </Typography>
               <Typography variant="h5" fontWeight={700} color="primary.main">
                 {fCurrency(summary.total_amount || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Gross sales</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Gross sales
+              </Typography>
             </Paper>
 
             <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Total Paid Amount</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Total Paid Amount
+              </Typography>
               <Typography variant="h5" fontWeight={700} color="success.main">
                 {fCurrency(summary.total_paid || summary.net_amount || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Collected in drawer</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Collected in drawer
+              </Typography>
             </Paper>
 
-            <Paper variant="outlined" sx={{ p: 2, borderRadius: 2 }}>
-              <Typography variant="caption" color="text.secondary">Discounts / Tax</Typography>
+            <Paper variant="outlined" sx={{ p: 2 }}>
+              <Typography variant="caption" color="text.secondary">
+                Discounts / Tax
+              </Typography>
               <Typography variant="h6" fontWeight={700} color="text.secondary">
                 -{fCurrency(summary.total_discount || 0)} / +{fCurrency(summary.total_tax || 0)}
               </Typography>
-              <Typography variant="caption" color="text.secondary">Applied in sales</Typography>
+              <Typography variant="caption" color="text.secondary">
+                Applied in sales
+              </Typography>
             </Paper>
           </Box>
         )}
 
         {/* Filters Toolbar */}
-        <Card sx={{ p: 2.5, mb: 3 }}>
+        <Paper sx={{ p: 2.5, mb: 3 }}>
           <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} alignItems="center">
             <TextField
               size="small"
@@ -355,7 +381,7 @@ export default function SalesReportPage() {
               </Button>
             )}
           </Stack>
-        </Card>
+        </Paper>
 
         {/* Data Table */}
         {isError ? (
