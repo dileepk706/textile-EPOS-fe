@@ -3,8 +3,8 @@ export interface ProductBatch {
   _id?: string;
   batch_no?: string;
   batch_number?: string;
-  quantity?: number;
-  available_quantity?: number;
+  quantity: number;
+  quantity_available: number;
   cost_price: number;
   selling_price: number;
   mrp?: number;

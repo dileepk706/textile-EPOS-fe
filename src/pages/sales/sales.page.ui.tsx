@@ -35,6 +35,7 @@ import { useSalesCartStore, SalesCartItem } from 'entities/sales';
 import { createSale } from 'shared/api/api.services';
 import { SelectBatchModal } from 'features/sales/select-batch-modal';
 import { Paper } from 'shared/ui/paper';
+import { queryClient } from 'shared/queryClient';
 
 const PAYMENT_METHODS = ['CASH', 'CARD', 'UPI', 'BANK_TRANSFER', 'CHEQUE', 'CREDIT'];
 
@@ -122,6 +123,9 @@ export default function SalesPage() {
         `Sale completed successfully! Invoice #${data?.invoice?.invoice_number || ''}`,
         { variant: 'success' }
       );
+      items.forEach((e) => {
+        queryClient.invalidateQueries({ queryKey: ['products', 'batches', e.product_id] });
+      });
       setReceiptData(data);
       clearCart();
       setAmountPaid('');

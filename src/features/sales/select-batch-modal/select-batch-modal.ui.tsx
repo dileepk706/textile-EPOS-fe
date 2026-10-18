@@ -74,8 +74,8 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
   const batchId = (b: ProductBatch) => b.id || b._id || '';
   const batchNumber = (b: ProductBatch) => b.batch_no || b.batch_number || 'BATCH';
   const getAvailableStock = (b: ProductBatch) =>
-    b.available_quantity !== undefined
-      ? b.available_quantity
+    b.quantity_available !== undefined
+      ? b.quantity_available
       : b.quantity !== undefined
       ? b.quantity
       : 0;
@@ -136,7 +136,13 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
   return (
     <Dialog fullWidth maxWidth="md" open={open} onClose={onClose}>
       <DialogTitle sx={{ pb: 1.5 }}>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" flexWrap="wrap" gap={1}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          flexWrap="wrap"
+          gap={1}
+        >
           <Box>
             <Typography variant="h6">{product.name}</Typography>
             <Typography variant="caption" color="text.secondary">
@@ -285,7 +291,8 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
                     size="small"
                     disabled={
                       pickQuantity >=
-                      getAvailableStock(selectedBatch) - getCartQuantityForBatch(batchId(selectedBatch))
+                      getAvailableStock(selectedBatch) -
+                        getCartQuantityForBatch(batchId(selectedBatch))
                     }
                     onClick={() => {
                       const maxStock = getAvailableStock(selectedBatch);
@@ -301,7 +308,10 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
                   </IconButton>
 
                   <Typography variant="caption" color="text.secondary">
-                    Max: {getAvailableStock(selectedBatch) - getCartQuantityForBatch(batchId(selectedBatch))} available
+                    Max:{' '}
+                    {getAvailableStock(selectedBatch) -
+                      getCartQuantityForBatch(batchId(selectedBatch))}{' '}
+                    available
                   </Typography>
                 </Stack>
               </Box>
@@ -359,10 +369,7 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
             )}
 
             {/* Total calculation preview */}
-            <Paper
-              variant="outlined"
-              sx={{ p: 2, borderRadius: 2, bgcolor: 'background.paper' }}
-            >
+            <Paper variant="outlined" sx={{ p: 2, borderRadius: 2, bgcolor: 'background.paper' }}>
               <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography variant="caption" color="text.secondary">
@@ -402,15 +409,20 @@ export function SelectBatchModal({ open, onClose, product }: SelectBatchModalPro
                 {batches.map((batch, index) => {
                   const bId = batchId(batch);
                   const bNo = batchNumber(batch);
-                  const available = getAvailableStock(batch);
+                  const available = batch.quantity;
                   const inCartQty = getCartQuantityForBatch(bId);
-                  const remaining = Math.max(0, available - inCartQty);
+                  const remaining = getAvailableStock(batch);
                   const isOutOfStock = remaining <= 0;
+                  console.log(batch);
 
                   return (
                     <TableRow key={bId || index} hover>
                       <TableCell>
-                        <Typography variant="body2" fontWeight={700} sx={{ fontFamily: 'monospace' }}>
+                        <Typography
+                          variant="body2"
+                          fontWeight={700}
+                          sx={{ fontFamily: 'monospace' }}
+                        >
                           {bNo}
                         </Typography>
                         {batch.created_at || batch.createdAt ? (
