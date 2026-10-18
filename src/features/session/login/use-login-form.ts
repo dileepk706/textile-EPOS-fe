@@ -16,7 +16,7 @@ export function useLoginForm() {
   const form = useForm<LoginUser>({
     mode: 'onTouched',
     resolver: standardSchemaResolver(LoginUserSchema),
-    defaultValues: { email: 'admin@textileshop.com', password: '123' },
+    defaultValues: { email: '', password: '' },
   });
 
   const mutation = useLoginMutation({

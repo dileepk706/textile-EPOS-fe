@@ -117,8 +117,8 @@ function AddToCartDialog({ open, product, onClose, onAdd, existingItem }: AddToC
         </Stack>
       </DialogTitle>
 
-      <DialogContent dividers>
-        <Stack spacing={2.5}>
+      <DialogContent>
+        <Stack spacing={2.5} mt={2}>
           <Stack direction="row" spacing={2}>
             <TextField
               label="Cost Price (₹)"
